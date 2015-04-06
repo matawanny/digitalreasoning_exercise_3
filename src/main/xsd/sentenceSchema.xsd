@@ -1,0 +1,66 @@
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+  <xs:annotation>
+    <xs:documentation>
+      XML Schema for NLP.
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:element name="sentenceset">
+    <xs:annotation>
+      <xs:documentation>
+        Container for a set of sentence document elements.
+        This is the root element of the XML file.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="sentence" type="tSentence"  minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+    <xs:complexType name="tSentence">
+    <xs:annotation>
+      <xs:documentation>
+        Container for word, punctuation
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="field" type="tField" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  
+    <xs:complexType name="tField">
+	    <xs:annotation>
+	      <xs:documentation>
+	        REQUIRED: all fields in the sentence
+	      </xs:documentation>
+	    </xs:annotation>    
+	   <xs:sequence>
+	      <xs:element name="fieldtype" type="FieldType" minOccurs="0"/>
+	      <xs:element name="value" type="xs:string" minOccurs="0"/>
+	      <xs:element name="total" type="xs:int" minOccurs="0"/>
+	      <xs:element name="start_index" type="xs:int" minOccurs="0"/>
+	      <xs:element name="end_index" type="xs:int" minOccurs="0"/>
+	    </xs:sequence>      
+    </xs:complexType>    
+    
+    <xs:simpleType name="FieldType">
+		<xs:annotation>
+			<xs:documentation>
+				Defines the data type for the field data
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="WORD" />
+			<xs:enumeration value="PUNCTUATION" />
+			<xs:enumeration value="WHITESPACE" />
+			<xs:enumeration value="NAMED_ENTITY" />
+		</xs:restriction>
+	</xs:simpleType>			
+    
+</xs:schema>
+
